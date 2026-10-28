@@ -59,13 +59,8 @@
     window.scrollTo(0, 0);
   }
 
-  // Configurable audience copy (gender track pending — config.js, not HTML).
-  document.querySelectorAll('[data-audience-label]').forEach(function (el) { el.textContent = CFG.audienceLabel; });
-  document.querySelectorAll('[data-audience-prompt]').forEach(function (el) { el.textContent = CFG.audiencePrompt; });
-  document.querySelectorAll('[data-audience-note]').forEach(function (el) { el.textContent = CFG.audienceNote; });
-  document.querySelectorAll('[data-ai-disclosure]').forEach(function (el) { el.textContent = CFG.aiDisclosure; });
-  $('pay-btn').textContent = 'Unlock for $' + CFG.priceUSD.toFixed(2) + ' →';
-  document.querySelector('.paywall h3').textContent = 'Unlock the full version — $' + CFG.priceUSD.toFixed(2);
+  // Static UI text is owned by i18n.js ([data-i18n] + applyI18n on boot).
+  var T = window.i18nT, TV = window.i18nTV;
 
   // ---------- session ----------
   var session = null;
@@ -75,7 +70,8 @@
 
   function attrLine(f) {
     var a = f.attrs;
-    return [a.ethnicity, a.age_segment, a.face_shape.split(' with')[0], a.hair_color].join(' · ');
+    var fs = window.i18nLang() === 'en' ? a.face_shape.split(' with')[0] : TV(a.face_shape);
+    return [TV(a.ethnicity), a.age_segment, fs, TV(a.hair_color)].join(' · ');
   }
 
   function renderPair() {
@@ -85,10 +81,10 @@
     $('img-a').src = A.src; $('img-b').src = B.src;
     $('attrs-a').textContent = attrLine(A);
     $('attrs-b').textContent = attrLine(B);
-    $('round-label').textContent = 'Round ' + cur.round + ' of ' + Core.MAX_ROUNDS;
+    $('round-label').textContent = T('roundLabel', { r: cur.round, n: Core.MAX_ROUNDS });
     $('progress-fill').style.width = (session.round / Core.MAX_ROUNDS * 100) + '%';
     $('converge-label').textContent = session.lastConvergenceCosine != null
-      ? 'Taste stability: ' + session.lastConvergenceCosine.toFixed(3) : '';
+      ? T('tasteStability') + session.lastConvergenceCosine.toFixed(3) : '';
     $('early-btn').classList.toggle('hidden', !session.canFinishEarly());
     shownAt = performance.now(); // reaction clock starts when the pair is shown
   }
@@ -111,18 +107,30 @@
     showResult();
   }
 
+  var lastResult = null;
+  function renderResultTexts() {
+    if (!lastResult) return;
+    var summary = lastResult.summary;
+    $('attr-summary').innerHTML = summary.length
+      ? summary.map(function (d) {
+          return '<li><strong>' + TV(d.value) + '</strong> (' + (T('dim_' + d.dimension) || d.dimension) +
+            ') — ' + T('summaryLine', { p: Math.round(d.diff * 100) }) + '</li>';
+        }).join('')
+      : '<li>' + T('summaryEmpty') + '</li>';
+    $('result-meta').textContent = T('resultMeta', {
+      n: session.round,
+      c: T('conf_' + session.confidence()),
+      r: T('finish_' + session.finishReason)
+    });
+    var note = $('pay-note');
+    note.textContent = CFG.stripePaymentLink ? T('payNoteLive') : T('payNoteProto');
+  }
+
   function showResult() {
     var ranked = session.rankedFaces();
     var best = faceById[ranked[0].id];
-    var summary = session.attributeSummary(20);
-    $('attr-summary').innerHTML = summary.length
-      ? summary.map(function (d) {
-          return '<li><strong>' + d.value + '</strong> (' + d.dimension.replace(/_/g, ' ') +
-            ') — picked +' + Math.round(d.diff * 100) + '% more than the pool average</li>';
-        }).join('')
-      : '<li>Not enough picks to summarize — your taste stayed broad.</li>';
-    $('result-meta').textContent = 'Based on ' + session.round + ' picks · Confidence: ' +
-      session.confidence() + ' · Finished by: ' + session.finishReason;
+    lastResult = { summary: session.attributeSummary(20) };
+    renderResultTexts();
     $('preview-img').src = best.src;
     show('result');
     // Preview + paywall are both on the result view; log both exposures once.
@@ -130,12 +138,6 @@
     if (!paywallLogged) {
       paywallLogged = true;
       logEvent('paywall_view', { priceUSD: CFG.priceUSD });
-    }
-    var note = $('pay-note');
-    if (CFG.stripePaymentLink) {
-      note.textContent = 'Secure checkout by Stripe. HD + 3 variations are produced after payment.';
-    } else {
-      note.textContent = 'Prototype: no payment link is configured yet, so checkout is disabled in this build.';
     }
   }
 
@@ -162,7 +164,7 @@
     if (CFG.stripePaymentLink) {
       window.location.href = CFG.stripePaymentLink;
     } else {
-      $('pay-note').textContent = 'Prototype: Stripe Payment Link is not configured (config.js → stripePaymentLink). No charge was made.';
+      $('pay-note').textContent = T('payNoteProto');
       var row = $('variant-row');
       var ranked = session.rankedFaces().slice(1, 4);
       row.innerHTML = ranked.map(function (r) {
@@ -181,6 +183,11 @@
     URL.revokeObjectURL(a.href);
   });
 
+  document.addEventListener('i18n:changed', function () {
+    if (session && !session.finished && !$('quiz').classList.contains('hidden')) renderPair();
+    if (lastResult && !$('result').classList.contains('hidden')) renderResultTexts();
+  });
+
   // ---------- boot ----------
   var currentFaces = [];
   var poolMedian = 1;
@@ -195,7 +202,7 @@
     })
     .catch(function (err) {
       console.error('[pool] failed to load pool.json — serve this folder over http (see README).', err);
-      $('start-btn').textContent = 'Could not load the face pool — see README (use a local http server)';
+      $('start-btn').textContent = T('poolError');
       $('start-btn').disabled = true;
     });
 })();
