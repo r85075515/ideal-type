@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ideal Type Finder — Find your type in 30 picks</title>
+<meta name="description" content="Pick between two faces, again and again. We learn your taste and generate your ideal type.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-head">
+  <span class="brand">Ideal Type Finder</span>
+  <span class="badge-ai">AI-generated content</span>
+</header>
+
+<main>
+  <!-- ============ LANDING ============ -->
+  <section id="landing" class="view">
+    <h1>Find <span data-audience-label>your ideal type</span> — by choosing, not describing.</h1>
+    <p class="lede">Most people can't describe their type. But you know it when you see it.
+      We show you two faces at a time. You pick the one you like more. That's it.</p>
+
+    <ol class="steps">
+      <li><strong>Pick, left or right.</strong> Up to 30 quick rounds of two faces. You can stop and see your result after 15.</li>
+      <li><strong>We learn your taste.</strong> Every pick trains a personal preference model — no forms, no sliders.</li>
+      <li><strong>Meet your ideal type.</strong> Get a free watermarked preview of the face your picks point to.</li>
+      <li><strong>Want it in HD?</strong> Unlock the high-resolution version plus 3 variations for <strong>$6.99</strong>, one time.</li>
+    </ol>
+
+    <p class="audience-note" data-audience-note>This test is for adults (18+).</p>
+    <button id="start-btn" class="cta">Start picking →</button>
+    <p class="micro">Free to play · No sign-up · No photo upload — ever</p>
+
+    <div class="disclosure">
+      <p data-ai-disclosure>All faces are AI-generated. No real people.</p>
+      <p>Your picks are stored only in this browser during the test (prototype). See the privacy note in the footer.</p>
+    </div>
+  </section>
+
+  <!-- ============ PAIRWISE FLOW ============ -->
+  <section id="quiz" class="view hidden">
+    <div class="progress-row">
+      <span id="round-label">Round 1 of 30</span>
+      <span id="converge-label" class="converge"></span>
+    </div>
+    <div class="progress-bar"><div id="progress-fill"></div></div>
+    <p class="quiz-prompt">Which face is closer to <span data-audience-label>your ideal type</span>?</p>
+    <p class="quiz-sub" data-audience-prompt>Answer honestly — there are no wrong picks.</p>
+
+    <div class="pair">
+      <button class="face-card" id="face-a" aria-label="Pick the left face">
+        <img id="img-a" alt="Candidate face A (AI-generated placeholder)">
+        <span class="face-attrs" id="attrs-a"></span>
+      </button>
+      <div class="vs">or</div>
+      <button class="face-card" id="face-b" aria-label="Pick the right face">
+        <img id="img-b" alt="Candidate face B (AI-generated placeholder)">
+        <span class="face-attrs" id="attrs-b"></span>
+      </button>
+    </div>
+
+    <div class="quiz-actions">
+      <button id="skip-btn" class="ghost">Neither — skip</button>
+      <button id="early-btn" class="ghost hidden">See my result now →</button>
+    </div>
+    <p class="micro">Tap a face to vote. Fast tapping is fine — your picks still count.</p>
+  </section>
+
+  <!-- ============ RESULT + PAYWALL ============ -->
+  <section id="result" class="view hidden">
+    <h2>Your ideal type, according to your picks</h2>
+    <p id="result-meta" class="micro"></p>
+
+    <h3>What you kept choosing</h3>
+    <ul id="attr-summary" class="summary-list"></ul>
+
+    <h3>Your preview</h3>
+    <div class="preview-wrap">
+      <img id="preview-img" alt="Your ideal type preview (AI-generated)">
+      <span class="watermark">PREVIEW · AI-GENERATED</span>
+    </div>
+    <p class="micro" data-ai-disclosure>AI-generated preview.</p>
+    <div id="paywall-anchor"></div>
+
+    <div class="paywall" id="paywall">
+      <h3>Unlock the full version — $6.99</h3>
+      <ul class="steps compact">
+        <li>High-resolution version, no watermark</li>
+        <li>Plus 3 variations of your ideal type</li>
+        <li>One-time payment. No subscription.</li>
+      </ul>
+      <button id="pay-btn" class="cta">Unlock for $6.99 →</button>
+      <p id="pay-note" class="micro"></p>
+    </div>
+
+    <div id="variants" class="variants hidden">
+      <h3>Your 3 variations would be based on these close matches</h3>
+      <div class="variant-row" id="variant-row"></div>
+      <p class="micro">Prototype note: in the live M0 flow, HD + variations are produced after payment (manual / semi-automated, per spec) — nothing is generated in this prototype.</p>
+    </div>
+
+    <div class="result-actions">
+      <button id="restart-btn" class="ghost">Start over</button>
+      <button id="export-btn" class="ghost">Export event log (JSON)</button>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>Prototype build for internal testing — not a public launch.</p>
+  <p>Privacy (prototype): votes and the event log live in your browser's localStorage only and are never sent anywhere. The production analytics backend is still TBD (see README).</p>
+  <p>Terms / privacy pages are on the pre-launch checklist.</p>
+</footer>
+
+<script src="config.js"></script>
+<script src="core.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
