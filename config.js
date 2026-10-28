@@ -18,6 +18,10 @@ window.M0_CONFIG = {
   // verified end-to-end in Stripe test mode with a test card.
   stripePaymentLink: 'https://buy.stripe.com/3cI28j0Tl5xwdBj5fvbjW00',
 
+  // Anonymous event collector (Apps Script web app -> Google Sheet
+  // "Ideal Type M0 Events"). Empty string disables sending.
+  eventEndpoint: 'https://script.google.com/macros/s/AKfycbxV1jWLkM2JBqFqkoRIGFdIxdgjN48SO67ko4YDqZfOVjIUeA5N15og9ac_5AKhqqizmA/exec',
+
   productName: 'Ideal Type Finder',
   aiDisclosure: 'All faces and the generated preview are AI-generated. No real people, no user photos are uploaded or used.'
 };

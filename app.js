@@ -21,7 +21,35 @@
     all.push(ev);
     try { localStorage.setItem(LS_KEY, JSON.stringify(all)); } catch (e) { /* storage full/blocked: console still has it */ }
     console.log('[event]', JSON.stringify(ev));
+    queueTelemetry(ev);
   }
+
+  // ---------- anonymous telemetry (M0 measurement) ----------
+  // Sends the same events (random per-visit session id, no personal data)
+  // to CFG.eventEndpoint in batches. Must never break the quiz: every call
+  // is guarded, and an empty endpoint disables sending entirely.
+  var SID_KEY = 'idealtype_m0_sid';
+  var sessionId = 's-anon';
+  try {
+    sessionId = sessionStorage.getItem(SID_KEY) || '';
+    if (!sessionId) {
+      sessionId = 's-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10);
+      sessionStorage.setItem(SID_KEY, sessionId);
+    }
+  } catch (e) { /* private mode etc: keep fallback id */ }
+  var telemetryQueue = [];
+  function flushTelemetry() {
+    if (!CFG.eventEndpoint || !telemetryQueue.length) return;
+    var payload = JSON.stringify({ session: sessionId, events: telemetryQueue.splice(0, telemetryQueue.length) });
+    try {
+      fetch(CFG.eventEndpoint, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body: payload, keepalive: true }).catch(function () {});
+    } catch (e) { /* ignore */ }
+  }
+  function queueTelemetry(ev) {
+    telemetryQueue.push(ev);
+    if (telemetryQueue.length >= 15 || ev.type === 'complete' || ev.type === 'checkout_click') flushTelemetry();
+  }
+  window.addEventListener('pagehide', flushTelemetry);
 
   // ---------- DOM ----------
   function $(id) { return document.getElementById(id); }
