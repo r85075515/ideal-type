@@ -13,10 +13,10 @@ window.M0_CONFIG = {
 
   // Paywall (v2 §1.2 / v2.1 §4.2: M0 test price, Stripe Payment Link).
   priceUSD: 6.99,
-  // EMPTY ON PURPOSE. Before launch: create the real Stripe Payment Link,
-  // paste it here, and verify with a test transaction (see README "Before
-  // launch"). The prototype never creates a Stripe link or account.
-  stripePaymentLink: '',
+  // Live Stripe Payment Link (created 2026-10-27, product "Ideal Type
+  // Finder — Full Result", USD 6.99 one-time, status Active). Checkout flow
+  // verified end-to-end in Stripe test mode with a test card.
+  stripePaymentLink: 'https://buy.stripe.com/3cI28j0Tl5xwdBj5fvbjW00',
 
   productName: 'Ideal Type Finder',
   aiDisclosure: 'All faces and the generated preview are AI-generated. No real people, no user photos are uploaded or used.'
