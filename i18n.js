@@ -163,6 +163,7 @@
 
   function dict() { return DICT[lang]; }
   function t(key, vars) {
+    if (typeof key !== 'string') return '';
     var s = dict()[key] || DICT.en[key] || key;
     if (vars) Object.keys(vars).forEach(function (k) { s = s.replace('{' + k + '}', vars[k]); });
     return s;
@@ -175,7 +176,7 @@
       el.textContent = t(el.getAttribute('data-i18n'), { label: t('audienceLabel'), price: window.M0_CONFIG ? window.M0_CONFIG.priceUSD.toFixed(2) : '6.99' });
     });
     document.querySelectorAll('[data-i18n-html]').forEach(function (el) {
-      el.innerHTML = t(el.getAttribute('data-i18n'), { label: t('audienceLabel') });
+      el.innerHTML = t(el.getAttribute('data-i18n-html'), { label: t('audienceLabel') });
     });
     document.querySelectorAll('[data-audience-label]').forEach(function (el) { el.textContent = t('audienceLabel'); });
     var toggle = document.getElementById('lang-toggle');
