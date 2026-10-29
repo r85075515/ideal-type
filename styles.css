@@ -58,3 +58,7 @@ footer a { color: #6c3fd4; }
 @media (min-width: 720px) { h1 { font-size: 40px; } .cta { max-width: 420px; margin-left: auto; margin-right: auto; } }
 .head-right { display: flex; gap: 8px; align-items: center; }
 .lang-toggle { padding: 5px 12px; font-size: 13px; font-weight: 600; border-radius: 999px; }
+
+.waitlist { margin-top: 26px; padding: 18px; border: 1px dashed #c9b8a8; border-radius: 14px; background: rgba(255,255,255,.55); }
+.wl-row { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 10px; }
+.wl-row input { padding: 10px 14px; border-radius: 999px; border: 1px solid #d8c9b8; min-width: 240px; font-size: 15px; }

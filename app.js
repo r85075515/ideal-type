@@ -129,12 +129,12 @@
   function showResult() {
     var ranked = session.rankedFaces();
     var best = faceById[ranked[0].id];
-    lastResult = { summary: session.attributeSummary(20) };
+    lastResult = { summary: session.attributeSummary(20), faceId: best.id };
     renderResultTexts();
     $('preview-img').src = best.src;
     show('result');
     // Preview + paywall are both on the result view; log both exposures once.
-    logEvent('preview_view', { faceId: best.id, fit: ranked[0].fit });
+    logEvent('preview_view', { faceId: best.id, fit: ranked[0].fit, variants: ranked.slice(1, 4).map(function (r) { return r.id; }) });
     if (!paywallLogged) {
       paywallLogged = true;
       logEvent('paywall_view', { priceUSD: CFG.priceUSD });
@@ -162,7 +162,8 @@
   $('pay-btn').addEventListener('click', function () {
     logEvent('checkout_click', { priceUSD: CFG.priceUSD, linkConfigured: !!CFG.stripePaymentLink });
     if (CFG.stripePaymentLink) {
-      window.location.href = CFG.stripePaymentLink;
+      var sep = CFG.stripePaymentLink.indexOf('?') === -1 ? '?' : '&';
+      window.location.href = CFG.stripePaymentLink + sep + 'client_reference_id=' + encodeURIComponent(sessionId);
     } else {
       $('pay-note').textContent = T('payNoteProto');
       var row = $('variant-row');
@@ -172,6 +173,15 @@
       }).join('');
       $('variants').classList.remove('hidden');
     }
+  });
+  var wlBtn = $('wl-btn');
+  if (wlBtn) wlBtn.addEventListener('click', function () {
+    var em = ($('wl-email').value || '').trim();
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)) { $('wl-msg').textContent = T('wlBad'); return; }
+    logEvent('waitlist', { email: em, faceId: lastResult ? lastResult.faceId : null });
+    flushTelemetry();
+    $('wl-msg').textContent = T('wlDone');
+    $('wl-email').value = '';
   });
   $('restart-btn').addEventListener('click', function () { show('landing'); });
   $('export-btn').addEventListener('click', function () {

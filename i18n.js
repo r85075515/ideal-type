@@ -46,10 +46,15 @@
       payLi2: 'Plus 3 variations of your ideal type',
       payLi3: 'One-time payment. No subscription.',
       payBtn: 'Unlock for ${price} →',
-      payNoteLive: 'Secure checkout by Stripe. HD + 3 variations are produced after payment.',
+      payNoteLive: 'Secure checkout by Stripe. We email your HD version + 3 variations to your checkout email within 24 hours of payment.',
       payNoteProto: 'Prototype: no payment link is configured yet, so checkout is disabled in this build.',
       variantsH3: 'Your 3 variations would be based on these close matches',
-      variantsNote: 'Prototype note: in the live M0 flow, HD + variations are produced after payment (manual / semi-automated, per spec) — nothing is generated in this prototype.',
+      variantsNote: 'In the live flow, your HD version + 3 variations are produced after payment and delivered by email within 24 hours.',
+      wlH3: 'Want her as your own custom model?',
+      wlText: 'One-on-one custom character models are in the works — not on sale yet. Join the list and we will email you when commissions open.',
+      wlPlaceholder: 'your@email.com', wlBtn: 'Join the list',
+      wlDone: 'You are on the list — we will be in touch when commissions open.',
+      wlBad: 'Please enter a valid email address.',
       restartBtn: 'Start over',
       exportBtn: 'Export event log (JSON)',
       footerBuild: 'Ideal Type Finder — a small AI preference test.',
@@ -65,6 +70,8 @@
       pvLi4: '<strong>Basic hosting logs.</strong> This site is served by GitHub Pages, which may record standard server logs (such as IP address and browser type) as described in GitHub\'s privacy statement.',
       pvH_ai: 'AI-generated content',
       pvP_ai: 'Every face on this site, including any preview or delivered result, is AI-generated. No face depicts a real person.',
+      pvH_waitlist: 'Waitlist emails',
+      pvP_waitlist: 'If you join the custom-model waitlist, we store the email address you enter for one purpose only: notifying you if custom model commissions open. We never sell or share it, and you can ask us to delete it at any time via the contact below.',
       pvH_contact: 'Contact',
       pvP_contact: 'Questions about this policy or a purchase: reply to the email receipt you received from Stripe for your purchase, and we will get back to you.',
       pvBack: 'Back to the test',
@@ -111,10 +118,15 @@
       payLi2: '再加 3 張你的理想型變化圖',
       payLi3: '一次性付款，不訂閱。',
       payBtn: '用 ${price} 解鎖 →',
-      payNoteLive: '由 Stripe 安全結帳。高清版＋3 張變化圖會在付款後製作。',
+      payNoteLive: '由 Stripe 安全結帳。付款後 24 小時內，我們會把高清版＋3 張變化圖寄到你結帳時填寫的信箱。',
       payNoteProto: '原型版：尚未設定付款連結，本版本結帳停用。',
       variantsH3: '你的 3 張變化圖會以這些接近的臉為基礎',
-      variantsNote: '原型說明：在正式 M0 流程中，高清版與變化圖於付款後製作（人工／半自動）——本原型不生成任何圖。',
+      variantsNote: '正式流程中，高清版＋3 張變化圖會在付款後製作，24 小時內寄到你的信箱。',
+      wlH3: '想把她做成你的專屬模型？',
+      wlText: '一對一客製人物模型正在開發中，尚未開賣。加入名單，開放委託時我們會第一時間用信箱通知你。',
+      wlPlaceholder: '你的信箱', wlBtn: '加入名單',
+      wlDone: '已加入名單，開放委託時會通知你。',
+      wlBad: '請輸入有效的信箱。',
       restartBtn: '重新開始',
       exportBtn: '匯出事件紀錄 (JSON)',
       footerBuild: 'Ideal Type Finder —— 一個小小的 AI 偏好測驗。',
@@ -130,6 +142,8 @@
       pvLi4: '<strong>基本主機紀錄。</strong>本站由 GitHub Pages 提供，GitHub 可能依其隱私聲明記錄標準伺服器日誌（例如 IP 位址與瀏覽器類型）。',
       pvH_ai: 'AI 生成內容',
       pvP_ai: '本站的每一張臉，包括預覽與交付的成果，都是 AI 生成。沒有任何一張臉描繪真實人物。',
+      pvH_waitlist: '候補名單信箱',
+      pvP_waitlist: '若你加入客製模型候補名單，我們只會把你填寫的信箱用於一個目的：在客製委託開放時通知你。我們不會出售或分享，你隨時可以透過下方聯絡方式要求刪除。',
       pvH_contact: '聯絡方式',
       pvP_contact: '對本政策或購買有疑問：回覆你從 Stripe 收到的購買收據郵件，我們會回覆你。',
       pvBack: '回到測驗',
@@ -179,6 +193,7 @@
       el.innerHTML = t(el.getAttribute('data-i18n-html'), { label: t('audienceLabel') });
     });
     document.querySelectorAll('[data-audience-label]').forEach(function (el) { el.textContent = t('audienceLabel'); });
+    document.querySelectorAll('[data-i18n-ph]').forEach(function (el) { el.setAttribute('placeholder', t(el.getAttribute('data-i18n-ph'))); });
     var toggle = document.getElementById('lang-toggle');
     if (toggle) toggle.textContent = t('toggleLabel');
   }
