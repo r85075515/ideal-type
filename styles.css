@@ -55,6 +55,8 @@ h3 { margin: 22px 0 8px; }
 .result-actions { display: flex; gap: 10px; justify-content: center; margin-top: 26px; flex-wrap: wrap; }
 footer { border-top: 1px solid #eee0d2; padding: 18px 16px; font-size: 12px; color: #8a8492; text-align: center; }
 footer a { color: #6c3fd4; }
+footer .home-btn { display: inline-block; padding: 9px 20px; border: 1.5px solid #6c3fd4; border-radius: 999px; color: #6c3fd4; font-size: 13.5px; font-weight: 700; text-decoration: none; }
+footer .home-btn:hover { background: #6c3fd4; color: #fff; }
 @media (min-width: 720px) { h1 { font-size: 40px; } .cta { max-width: 420px; margin-left: auto; margin-right: auto; } }
 .head-right { display: flex; gap: 8px; align-items: center; }
 .lang-toggle { padding: 5px 12px; font-size: 13px; font-weight: 600; border-radius: 999px; }
@@ -62,3 +64,43 @@ footer a { color: #6c3fd4; }
 .waitlist { margin-top: 26px; padding: 18px; border: 1px dashed #c9b8a8; border-radius: 14px; background: rgba(255,255,255,.55); }
 .wl-row { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 10px; }
 .wl-row input { padding: 10px 14px; border-radius: 999px; border: 1px solid #d8c9b8; min-width: 240px; font-size: 15px; }
+
+/* ===== Dark mode (2026-11-05 site standard) =====
+   Initial data-theme is set by the inline head script from localStorage
+   or prefers-color-scheme before first paint (no flash). Palette is a
+   tuned warm plum-dark, not an inversion; photos are never filtered. */
+:root { color-scheme: light; }
+html[data-theme="dark"] { color-scheme: dark; }
+/* Base #151020 (HSL lightness ~9%, inside the 7-12% band, never #000);
+   surfaces step up ~+5 lightness points per tier; borders are white
+   alpha; depth comes from the lightness ladder, not shadows. */
+html[data-theme="dark"] body { color: #ece7f2;
+  background: linear-gradient(180deg, #1b1626 0, #17131f 260px, #151020 100%) fixed, #151020; }
+html[data-theme="dark"] .site-head { background: rgba(27,22,38,.85); border-bottom-color: rgba(255,255,255,.08); }
+html[data-theme="dark"] .badge-ai { background: #352a54; color: #d3c2f7; }
+html[data-theme="dark"] .lede { color: #bab1c7; }
+html[data-theme="dark"] .ghost { background: #211a30; border-color: rgba(255,255,255,.10); color: #ece7f2; }
+html[data-theme="dark"] .ghost:hover { border-color: #b07fe8; background: #28203a; }
+html[data-theme="dark"] .micro { color: #a298b1; }
+html[data-theme="dark"] .quiz-sub { color: #a298b1; }
+html[data-theme="dark"] .disclosure { background: #1f1930; border-color: rgba(255,255,255,.08); color: #c9c0d8; }
+html[data-theme="dark"] .converge { color: #63cf92; }
+html[data-theme="dark"] .progress-bar { background: rgba(255,255,255,.12); }
+html[data-theme="dark"] .face-card { background: #211a30; box-shadow: 0 0 0 1px rgba(255,255,255,.08); }
+html[data-theme="dark"] .face-card:hover { box-shadow: 0 0 0 1px rgba(255,255,255,.16); }
+html[data-theme="dark"] .face-card:active { border-color: #b07fe8; }
+html[data-theme="dark"] .face-attrs { color: #bab1c7; }
+html[data-theme="dark"] .preview-wrap { box-shadow: 0 0 0 1px rgba(255,255,255,.10); }
+html[data-theme="dark"] .paywall { background: #211a30; box-shadow: none; }
+html[data-theme="dark"] .cta { box-shadow: none; }
+html[data-theme="dark"] .cta:hover { box-shadow: none; }
+html[data-theme="dark"] .vs { box-shadow: none; }
+html[data-theme="dark"] .waitlist { background: rgba(33,26,48,.55); border-color: rgba(255,255,255,.18); }
+html[data-theme="dark"] .wl-row input { background: #1b1526; border-color: rgba(255,255,255,.10); color: #ece7f2; }
+html[data-theme="dark"] footer { border-top-color: rgba(255,255,255,.08); color: #a298b1; }
+html[data-theme="dark"] footer a { color: #cdaef5; }
+html[data-theme="dark"] footer .home-btn { border-color: #b07fe8; color: #d9c2f7; }
+html[data-theme="dark"] footer .home-btn:hover { background: #6c3fd4; color: #fff; }
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}

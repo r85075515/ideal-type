@@ -3,15 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ideal Type Finder — Find your type in 30 picks</title>
+<title data-i18n="pageTitle">Ideal Type Finder — Find your type in 30 picks</title>
 <meta name="description" content="Pick between two faces, again and again. We learn your taste and generate your ideal type.">
+<meta name="color-scheme" content="light dark">
+<script>(function(){try{var t=localStorage.getItem('itf-theme');if(t!=='dark'&&t!=='light'){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','light');}})();</script>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <header class="site-head">
   <span class="brand">Ideal Type Finder</span>
-  <span class="head-right"><button id="lang-toggle" class="ghost lang-toggle" type="button">中文</button><span class="badge-ai" data-i18n="badgeAi">AI-generated content</span></span>
+  <span class="head-right"><button id="theme-toggle" class="ghost lang-toggle" type="button" aria-label="Toggle dark mode">☾ Dark</button><button id="lang-toggle" class="ghost lang-toggle" type="button">中文</button><span class="badge-ai" data-i18n="badgeAi">AI-generated content</span></span>
 </header>
 
 <main>
@@ -117,13 +119,15 @@
 </main>
 
 <footer>
+  <p><a class="home-btn" href="https://plaigroundlab.com" data-i18n="footerHomeLink">← Back to PlAIground Lab</a></p>
   <p data-i18n="footerBuild"></p>
-  <p><a href="/privacy" data-i18n="footerPrivacyLink">Privacy policy</a> · <a href="https://plaigroundlab.com/" data-i18n="footerHomeLink">PlAIground Lab</a></p>
+  <p><a href="privacy.html" data-i18n="footerPrivacyLink">Privacy policy</a></p>
 </footer>
 
 <script src="config.js"></script>
 <script src="core.js"></script>
 <script src="i18n.js"></script>
+<script src="theme.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

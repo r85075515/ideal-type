@@ -4,12 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title data-i18n="pvTitle">Privacy Policy — Ideal Type Finder</title>
+<meta name="color-scheme" content="light dark">
+<script>(function(){try{var t=localStorage.getItem('itf-theme');if(t!=='dark'&&t!=='light'){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','light');}})();</script>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <header class="site-head">
   <span class="brand">Ideal Type Finder</span>
-  <span class="head-right"><button id="lang-toggle" class="ghost lang-toggle" type="button">中文</button><span class="badge-ai" data-i18n="badgeAi">AI-generated content</span></span>
+  <span class="head-right"><button id="theme-toggle" class="ghost lang-toggle" type="button" aria-label="Toggle dark mode">☾ Dark</button><button id="lang-toggle" class="ghost lang-toggle" type="button">中文</button><span class="badge-ai" data-i18n="badgeAi">AI-generated content</span></span>
 </header>
 <main>
 <section>
@@ -40,10 +42,10 @@
 </section>
 </main>
 <footer>
-  <p data-i18n="footerBuild"></p>
-  <p><a href="/privacy" data-i18n="footerPrivacyLink">Privacy policy</a> · <a href="https://plaigroundlab.com/" data-i18n="footerHomeLink">PlAIground Lab</a></p>
+  <p><a class="home-btn" href="https://plaigroundlab.com" data-i18n="footerHomeLink">← Back to PlAIground Lab</a></p>
 </footer>
 <script src="config.js"></script>
 <script src="i18n.js"></script>
+<script src="theme.js"></script>
 </body>
 </html>
