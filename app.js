@@ -16,13 +16,48 @@
     try { return JSON.parse(localStorage.getItem(LS_KEY) || '[]'); } catch (e) { return []; }
   }
   function logEvent(type, data) {
-    var ev = Object.assign({ type: type, ts: new Date().toISOString() }, data || {});
+    var ev = Object.assign({ type: type, ts: new Date().toISOString() }, data || {}, attribution);
+    // Only the waitlist event may carry an email address.
+    if (type !== 'waitlist' && 'email' in ev) delete ev.email;
     var all = loadEvents();
     all.push(ev);
     try { localStorage.setItem(LS_KEY, JSON.stringify(all)); } catch (e) { /* storage full/blocked: console still has it */ }
     console.log('[event]', JSON.stringify(ev));
     queueTelemetry(ev);
   }
+
+  // ---------- first-touch attribution (UTM + referrer) ----------
+  // Captured once on the first visit and attached to every event. Values are
+  // trimmed, length-capped, and anything that looks like an email is dropped;
+  // the referrer is reduced to origin + path (no query string).
+  var UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+  var ATTR_KEY = 'idealtype_m0_attribution';
+  function cleanVal(v) {
+    v = (v || '').trim().slice(0, 150);
+    return v && !/@/.test(v) ? v : null;
+  }
+  function readAttribution() {
+    var stored = null;
+    try { stored = JSON.parse(localStorage.getItem(ATTR_KEY) || sessionStorage.getItem(ATTR_KEY) || 'null'); } catch (e) { stored = null; }
+    if (stored && typeof stored === 'object') return stored;
+    var a = {};
+    var params;
+    try { params = new URLSearchParams(window.location.search); } catch (e) { params = null; }
+    UTM_KEYS.forEach(function (k) { a[k] = params ? cleanVal(params.get(k)) : null; });
+    var ref = null;
+    try {
+      if (document.referrer) { var u = new URL(document.referrer); ref = cleanVal(u.origin + u.pathname); }
+    } catch (e) { ref = null; }
+    a.referrer = ref;
+    a.first_touch_ts = new Date().toISOString();
+    var json = JSON.stringify(a);
+    try { localStorage.setItem(ATTR_KEY, json); } catch (e) {
+      try { sessionStorage.setItem(ATTR_KEY, json); } catch (e2) { /* blocked: keep in memory */ }
+    }
+    return a;
+  }
+  var attribution = {};
+  try { attribution = readAttribution(); } catch (e) { attribution = {}; }
 
   // ---------- anonymous telemetry (M0 measurement) ----------
   // Sends the same events (random per-visit session id, no personal data)
@@ -163,7 +198,10 @@
     logEvent('checkout_click', { priceUSD: CFG.priceUSD, linkConfigured: !!CFG.stripePaymentLink });
     if (CFG.stripePaymentLink) {
       var sep = CFG.stripePaymentLink.indexOf('?') === -1 ? '?' : '&';
-      window.location.href = CFG.stripePaymentLink + sep + 'client_reference_id=' + encodeURIComponent(sessionId);
+      var utmQs = UTM_KEYS.filter(function (k) {
+        return attribution[k] && /^[A-Za-z0-9_-]{1,150}$/.test(attribution[k]); // Stripe-accepted charset
+      }).map(function (k) { return '&' + k + '=' + encodeURIComponent(attribution[k]); }).join('');
+      window.location.href = CFG.stripePaymentLink + sep + 'client_reference_id=' + encodeURIComponent(sessionId) + utmQs;
     } else {
       $('pay-note').textContent = T('payNoteProto');
       var row = $('variant-row');
