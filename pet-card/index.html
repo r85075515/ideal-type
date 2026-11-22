@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Custom AI Pet Christmas Cards — PlAIground Lab</title>
+<meta name="description" content="Turn your pet's photo into a custom AI Christmas card. Digital delivery by email. Single card US$9.99, 3-card pack US$19.99. Order early — the holiday window closes in mid-December.">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; color: #221d2b; line-height: 1.55;
+    background: linear-gradient(180deg, #fdf3ec 0, #faf4ef 260px, #faf7f4 100%) fixed, #faf7f4; }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 20px 64px; }
+  header.top { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; }
+  .brand { font-weight: 800; font-size: 20px; background: linear-gradient(90deg, #6c3fd4, #d4488b);
+    -webkit-background-clip: text; background-clip: text; color: transparent; text-decoration: none; }
+  .badge-ai { font-size: 12px; font-weight: 600; background: #efe6ff; color: #5b3ea8; padding: 3px 9px; border-radius: 999px; margin-left: 8px; }
+  .home-link { font-size: 14px; color: #5b3ea8; text-decoration: none; font-weight: 600; }
+  h1 { font-size: 34px; line-height: 1.2; margin: 18px 0 10px; }
+  h2 { font-size: 24px; margin: 40px 0 12px; }
+  .lede { font-size: 18px; color: #4a4257; margin: 0 0 8px; }
+  .window-note { display: inline-block; background: #fdeef6; color: #a12c66; font-weight: 600; font-size: 14px;
+    padding: 5px 12px; border-radius: 999px; margin: 8px 0 4px; }
+  figure { margin: 0; }
+  figure img { width: 100%; height: auto; border-radius: 14px; display: block; box-shadow: 0 6px 24px rgba(60,30,90,.13); }
+  figcaption { font-size: 13px; color: #6d6480; text-align: center; margin-top: 8px; font-weight: 600; }
+  .ba { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 22px; align-items: start; }
+  .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 6px; }
+  @media (max-width: 620px) { .ba, .gallery { grid-template-columns: 1fr; } h1 { font-size: 28px; } }
+  .card { background: rgba(255,255,255,.75); border: 1px solid #eee0d2; border-radius: 16px; padding: 22px; }
+  .prices { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 620px) { .prices { grid-template-columns: 1fr; } }
+  .price-card { text-align: center; position: relative; }
+  .price-card .amount { font-size: 34px; font-weight: 800; margin: 6px 0 2px; }
+  .price-card .per { color: #6d6480; font-size: 14px; }
+  .best { position: absolute; top: -11px; left: 50%; transform: translateX(-50%); background: linear-gradient(90deg, #6c3fd4, #d4488b);
+    color: #fff; font-size: 12px; font-weight: 700; padding: 3px 12px; border-radius: 999px; }
+  .buy-btn { display: block; width: 100%; margin-top: 16px; padding: 13px 16px; font-size: 16px; font-weight: 700;
+    border-radius: 12px; border: 2px dashed #b9a8d9; background: #f4effc; color: #5b3ea8; cursor: not-allowed; }
+  .btn-note { font-size: 12.5px; color: #8a7fa3; margin-top: 8px; }
+  ol.steps { padding-left: 22px; }
+  ol.steps li { margin-bottom: 12px; }
+  .zh { background: #f7f2ff; border: 1px solid #e4d9fb; border-radius: 16px; padding: 20px 22px; }
+  details { background: rgba(255,255,255,.75); border: 1px solid #eee0d2; border-radius: 12px; padding: 12px 18px; margin-bottom: 10px; }
+  summary { font-weight: 700; cursor: pointer; }
+  details p { margin: 8px 0 4px; color: #3d3650; }
+  ul { padding-left: 22px; }
+  footer { margin-top: 48px; border-top: 1px solid #eee0d2; padding-top: 18px; font-size: 13.5px; color: #6d6480; }
+  footer a { color: #5b3ea8; text-decoration: none; font-weight: 600; }
+  .mail { font-weight: 700; color: #221d2b; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <span><a class="brand" href="https://plaigroundlab.com">PlAIground Lab</a><span class="badge-ai">AI-generated</span></span>
+    <a class="home-link" href="https://plaigroundlab.com">← Back to PlAIground Lab</a>
+  </header>
+
+  <h1>Custom AI Pet Christmas Cards — Turn Your Pet's Photo Into a Festive Digital Card</h1>
+  <p class="lede">Give your pet a starring role this Christmas. Send us a photo of your pet and PlAIground Lab's AI will turn it into a custom Christmas-themed digital card — ready to share with family and friends, or to send as a holiday greeting.</p>
+  <span class="window-note">🎄 Order early — the holiday ordering window closes in mid-December</span>
+
+  <div class="ba">
+    <figure>
+      <img src="sample-before-golden.webp" alt="Original photo of a golden retriever">
+      <figcaption>YOUR PHOTO</figcaption>
+    </figure>
+    <figure>
+      <img src="sample-card-golden.webp" alt="AI Christmas card generated from the golden retriever photo">
+      <figcaption>YOUR CHRISTMAS CARD</figcaption>
+    </figure>
+  </div>
+
+  <h2>More festive stars</h2>
+  <div class="gallery">
+    <figure>
+      <img src="sample-card-cat.webp" alt="AI Christmas card featuring a cat">
+      <figcaption>Every pet gets its own unique card</figcaption>
+    </figure>
+    <figure>
+      <img src="sample-card-corgi.webp" alt="AI Christmas card featuring a corgi">
+      <figcaption>Stylised AI artwork, made from your photo</figcaption>
+    </figure>
+  </div>
+
+  <h2>What you get</h2>
+  <div class="card">
+    <ul>
+      <li>Custom AI-generated Christmas cards featuring <strong>your</strong> pet</li>
+      <li>Digital files delivered by email — no printing, no shipping</li>
+      <li>Each card is a unique AI-generated artwork based on your pet's photo</li>
+      <li>Add your own greeting message to the card</li>
+    </ul>
+    <p>Your cards are delivered digitally by email once generation and a quick quality check are complete. Please order early and allow time for AI generation before the holiday rush.</p>
+  </div>
+
+  <h2>Pricing</h2>
+  <div class="prices">
+    <div class="card price-card">
+      <div style="font-weight:700;">Single Card</div>
+      <div class="amount">US$9.99</div>
+      <div class="per">one custom card, one pet</div>
+      <!-- STRIPE LINK PLACEHOLDER: single card — replace with Payment Link when provided -->
+      <button class="buy-btn" disabled>Buy Single Card — US$9.99</button>
+      <div class="btn-note">Secure Stripe checkout opens here shortly — link being connected.</div>
+    </div>
+    <div class="card price-card">
+      <span class="best">BEST VALUE</span>
+      <div style="font-weight:700;">3-Card Pack</div>
+      <div class="amount">US$19.99</div>
+      <div class="per">three custom cards — save vs. singles</div>
+      <!-- STRIPE LINK PLACEHOLDER: 3-card pack — replace with Payment Link when provided -->
+      <button class="buy-btn" disabled>Buy 3-Card Pack — US$19.99</button>
+      <div class="btn-note">Secure Stripe checkout opens here shortly — link being connected.</div>
+    </div>
+  </div>
+
+  <h2>How to order</h2>
+  <div class="card">
+    <ol class="steps">
+      <li><strong>Pay</strong> — Click the payment button above and complete checkout securely via Stripe.</li>
+      <li><strong>Send your pet's photo</strong> — After payment, email your pet's photo and the greeting you'd like on the card to <span class="mail">plaigroundlab.ai@gmail.com</span> with the subject line <strong>"Pet Card Order"</strong>. A clear, well-lit photo with your pet's face visible works best — one pet per photo.</li>
+      <li><strong>Receive your cards</strong> — Your finished Christmas cards arrive by email as digital files. Download, share, or send them as your holiday greeting.</li>
+    </ol>
+  </div>
+
+  <h2>中文摘要</h2>
+  <div class="zh">
+    <p>把你家寵物的照片，變成獨一無二的 AI 聖誕卡。PlAIground Lab 以 AI 將寵物照片生成聖誕主題數位卡片，成品以 email 交付（僅數位檔案，不含印刷寄送）。</p>
+    <ul>
+      <li>價格：單卡 US$9.99／3 卡包 US$19.99</li>
+      <li>訂購方式：點上方付款按鈕以 Stripe 付款後，將寵物照片與想寫上的賀詞寄到 <strong>plaigroundlab.ai@gmail.com</strong>，主旨註明 "Pet Card Order"</li>
+      <li>請提早下單：聖誕訂購窗口將於 12 月中旬關閉</li>
+      <li>政策：成品有明顯錯誤可免費重生 1 次；生成前可全額退款；交付後不退款（交付失敗或檔案不可用除外）</li>
+    </ul>
+  </div>
+
+  <h2>Licensing &amp; likeness</h2>
+  <div class="card">
+    <ul>
+      <li>You must own the rights to any photo you send us, or have the photographer's permission to use it. By sending a photo, you confirm you have the right to use it for this order.</li>
+      <li>Finished cards are for personal use only — share them with family and friends, or use them as your own holiday greeting. Commercial use, resale, and redistribution are not included.</li>
+      <li>Your pet's likeness is used only to create your cards. We do not use your photos for any other purpose.</li>
+      <li>All cards are AI-generated artwork. Minor AI artefacts may appear; each card is a stylised digital illustration, not a photograph.</li>
+    </ul>
+  </div>
+
+  <h2>FAQ</h2>
+  <details>
+    <summary>What kind of photo works best?</summary>
+    <p>A clear, well-lit photo with your pet's face visible and in focus works best. Avoid blurry, very dark, or heavily filtered photos, and avoid photos where the pet's face is hidden or cut off. JPG or PNG files are fine.</p>
+  </details>
+  <details>
+    <summary>How long will my cards take?</summary>
+    <p>Cards are delivered digitally by email once generation and a quick quality check are complete. Ordering early in the season is recommended, as the Christmas window closes in mid-December.</p>
+  </details>
+  <details>
+    <summary>Can I request changes?</summary>
+    <p>If a card has an obvious error — for example, the wrong pet, a missing feature, or garbled text — contact us and we will regenerate the affected card once, free of charge. Style preferences (for example, a different Christmas theme) count as a new generation and are not included as a free revision.</p>
+  </details>
+  <details>
+    <summary>What is the refund policy?</summary>
+    <p>If your cards have not yet been generated, you may request a full refund. Once the cards have been delivered, refunds are not available, as this is a digital product — except where delivery fails or the files are unusable, in which case please contact us and we will make it right.</p>
+  </details>
+  <details>
+    <summary>Can I use the cards commercially?</summary>
+    <p>No. Finished cards are for personal use only. You may share them with family and friends or use them as a personal holiday greeting, but commercial use, resale, redistribution, and use in advertising are not permitted.</p>
+  </details>
+  <details>
+    <summary>Are the cards AI-generated? Will people know?</summary>
+    <p>Yes — every card is AI-generated artwork based on your pet's photo, and each card is a stylised digital illustration rather than a photograph. We recommend telling recipients the cards are AI-made when you share them.</p>
+  </details>
+
+  <footer>
+    <p>A <a href="https://plaigroundlab.com">PlAIground Lab</a> product · Also try <a href="https://ideal-type.plaigroundlab.com">Ideal Type Finder</a> · Questions? Email <span class="mail">plaigroundlab.ai@gmail.com</span></p>
+    <p>All cards are AI-generated artwork created from your photo, for personal use only.</p>
+  </footer>
+</div>
+</body>
+</html>
