@@ -1,0 +1,22 @@
+name = "plaigroundlab-fulfillment"
+main = "src/index.js"
+compatibility_date = "2026-11-01"
+
+[vars]
+# Optional JSON map of Stripe Payment Link ID -> product_key
+PRODUCTS_JSON = "{}"
+
+# Bind your Cloudflare KV namespace & R2 bucket before deploying:
+# [[kv_namespaces]]
+# binding = "ORDERS_KV"
+# id = "<KV_NAMESPACE_ID>"
+#
+# [[r2_buckets]]
+# binding = "DELIVERY_BUCKET"
+# bucket_name = "plaigroundlab-deliveries"
+
+# Required Worker Secrets (set via `wrangler secret put` or Cloudflare Dashboard — NEVER commit):
+#   STRIPE_WEBHOOK_SECRET
+#   DOWNLOAD_SIGNING_SECRET
+#   FULFILLMENT_WEBHOOK_URL      (optional: fulfillment notification endpoint)
+#   FULFILLMENT_WEBHOOK_TOKEN    (optional: bearer token for notification endpoint)
