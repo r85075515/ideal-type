@@ -48,6 +48,7 @@ test('POST /webhook/stripe accepts valid test-mode checkout, dedupes replay, and
   const env = {
     STRIPE_WEBHOOK_SECRET: secret,
     ORDERS_KV: kv,
+    PRODUCTS_JSON: JSON.stringify({ plink_test_pet3: 'pet-card-3pack' }),
     FULFILLMENT_WEBHOOK_URL: 'https://notify.example.test/send',
     FULFILLMENT_WEBHOOK_TOKEN: 'tok_unit_only',
     _TEST_NOW_SEC: nowSec,
@@ -64,6 +65,7 @@ test('POST /webhook/stripe accepts valid test-mode checkout, dedupes replay, and
     data: {
       object: {
         id: 'cs_test_petcard_001',
+        payment_link: 'plink_test_pet3',
         amount_total: 1999,
         currency: 'usd',
         payment_status: 'paid',

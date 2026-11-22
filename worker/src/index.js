@@ -90,10 +90,6 @@ export function resolveProductKey(session, productsMap) {
   if (plink && productsMap[plink]) return productsMap[plink];
   const metaKey = session?.metadata?.product_key;
   if (metaKey) return metaKey;
-  const cents = session?.amount_total;
-  if (cents === 699) return 'ideal-type-m0';
-  if (cents === 999) return 'pet-card-single';
-  if (cents === 1999) return 'pet-card-3pack';
   return 'unknown-product';
 }
 
