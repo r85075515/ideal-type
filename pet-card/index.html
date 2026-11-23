@@ -5,11 +5,89 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Custom AI Pet Christmas Cards — PlAIground Lab</title>
 <meta name="description" content="Turn your pet's photo into a custom AI Christmas card. Digital delivery by email. Single card US$9.99, 3-card pack US$19.99. Order early — the holiday window closes in mid-December.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="canonical" href="https://ideal-type.plaigroundlab.com/pet-card/">
+<meta property="og:type" content="product">
+<meta property="og:site_name" content="PlAIground Lab">
+<meta property="og:title" content="Custom AI Pet Christmas Cards — PlAIground Lab">
+<meta property="og:description" content="Turn your pet's photo into a custom AI Christmas card. Single card US$9.99, 3-card pack US$19.99. Digital delivery by email.">
+<meta property="og:url" content="https://ideal-type.plaigroundlab.com/pet-card/">
+<meta property="og:image" content="https://ideal-type.plaigroundlab.com/pet-card/og-card.png">
+<meta property="og:image:alt" content="Golden retriever transformed into a custom AI Christmas oil-painting greeting card">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Custom AI Pet Christmas Cards — PlAIground Lab">
+<meta name="twitter:description" content="Turn your pet's photo into a custom AI Christmas card. Single card US$9.99, 3-card pack US$19.99.">
+<meta name="twitter:image" content="https://ideal-type.plaigroundlab.com/pet-card/og-card.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Product",
+      "name": "Custom AI Pet Christmas Cards",
+      "description": "Custom AI-generated holiday digital greeting cards created from your pet's photo and delivered by email.",
+      "image": "https://ideal-type.plaigroundlab.com/pet-card/og-card.png",
+      "brand": {
+        "@type": "Brand",
+        "name": "PlAIground Lab"
+      },
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Single Card",
+          "priceCurrency": "USD",
+          "price": "9.99",
+          "availability": "https://schema.org/InStock",
+          "url": "https://ideal-type.plaigroundlab.com/pet-card/"
+        },
+        {
+          "@type": "Offer",
+          "name": "3-Card Pack",
+          "priceCurrency": "USD",
+          "price": "19.99",
+          "availability": "https://schema.org/InStock",
+          "url": "https://ideal-type.plaigroundlab.com/pet-card/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What kind of photo works best?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A clear, well-lit photo with your pet's face visible and in focus works best (JPG or PNG). Avoid blurry, very dark, or heavily filtered photos."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long will my cards take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cards are delivered digitally by email once generation and a quick quality check are complete. Ordering early in the season is recommended before mid-December."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I request changes?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "If a card has an obvious error — such as the wrong pet, a missing feature, or garbled text — contact us and we will regenerate the affected card once, free of charge."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 <style>
   * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
   body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; color: #221d2b; line-height: 1.55;
     background: linear-gradient(180deg, #fdf3ec 0, #faf4ef 260px, #faf7f4 100%) fixed, #faf7f4; }
-  .wrap { max-width: 880px; margin: 0 auto; padding: 0 20px 64px; }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 20px 84px; }
   header.top { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; }
   .brand { font-weight: 800; font-size: 20px; background: linear-gradient(90deg, #6c3fd4, #d4488b);
     -webkit-background-clip: text; background-clip: text; color: transparent; text-decoration: none; }
@@ -19,36 +97,76 @@
   h2 { font-size: 24px; margin: 40px 0 12px; }
   .lede { font-size: 18px; color: #4a4257; margin: 0 0 8px; }
   .window-note { display: inline-block; background: #fdeef6; color: #a12c66; font-weight: 600; font-size: 14px;
-    padding: 5px 12px; border-radius: 999px; margin: 8px 0 4px; }
+    padding: 5px 12px; border-radius: 999px; margin: 8px 0 10px; }
+  .trust-strip { display: flex; flex-wrap: wrap; gap: 10px; margin: 10px 0 18px; }
+  .trust-pill { font-size: 13px; font-weight: 600; color: #42355c; background: rgba(255,255,255,.85);
+    border: 1px solid #eadcf8; border-radius: 999px; padding: 5px 12px; box-shadow: 0 2px 8px rgba(60,30,90,.05); }
+
+  /* Interactive Before/After Comparison Slider + Responsive Fallback Side-by-Side */
+  .ba-wrap { margin-top: 18px; }
+  .ba-compare { position: relative; max-width: 560px; margin: 0 auto; border-radius: 16px; overflow: hidden;
+    box-shadow: 0 12px 34px rgba(60,30,90,.16); border: 1px solid #e7d9f2; background: #1c1528; aspect-ratio: 2 / 3; }
+  .ba-compare img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; user-select: none; }
+  .ba-overlay { position: absolute; inset: 0; overflow: hidden; clip-path: inset(0 0 0 48%); }
+  .ba-tag { position: absolute; bottom: 14px; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; padding: 4px 10px;
+    border-radius: 999px; background: rgba(24,18,36,.78); color: #fff; backdrop-filter: blur(4px); z-index: 2; pointer-events: none; }
+  .ba-tag-before { left: 14px; }
+  .ba-tag-after { right: 14px; background: linear-gradient(90deg, rgba(108,63,212,.9), rgba(212,72,139,.9)); }
+  .ba-divider { position: absolute; top: 0; bottom: 0; left: 52%; width: 2px; background: #fff; box-shadow: 0 0 10px rgba(0,0,0,.4); z-index: 3; pointer-events: none; transform: translateX(-50%); }
+  .ba-handle { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 38px; height: 38px; border-radius: 999px;
+    background: #fff; color: #5b3ea8; font-weight: 800; font-size: 14px; display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 14px rgba(24,18,36,.35); border: 2px solid #6c3fd4; }
+  .ba-range { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; z-index: 4; }
+  .ba-hint { font-size: 13px; color: #6d6480; text-align: center; margin-top: 10px; font-weight: 600; }
+
   figure { margin: 0; }
-  figure img { width: 100%; height: auto; border-radius: 14px; display: block; box-shadow: 0 6px 24px rgba(60,30,90,.13); }
+  figure img { width: 100%; height: auto; border-radius: 14px; display: block; box-shadow: 0 6px 24px rgba(60,30,90,.13); transition: transform .22s ease, box-shadow .22s ease; }
+  figure img:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(60,30,90,.18); }
   figcaption { font-size: 13px; color: #6d6480; text-align: center; margin-top: 8px; font-weight: 600; }
-  .ba { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 22px; align-items: start; }
   .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 6px; }
-  @media (max-width: 620px) { .ba, .gallery { grid-template-columns: 1fr; } h1 { font-size: 28px; } }
-  .card { background: rgba(255,255,255,.75); border: 1px solid #eee0d2; border-radius: 16px; padding: 22px; }
+  @media (max-width: 620px) { .gallery { grid-template-columns: 1fr; } h1 { font-size: 28px; } }
+  .card { background: rgba(255,255,255,.82); border: 1px solid #eee0d2; border-radius: 16px; padding: 22px; transition: transform .18s ease, box-shadow .18s ease; }
   .prices { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   @media (max-width: 620px) { .prices { grid-template-columns: 1fr; } }
   .price-card { text-align: center; position: relative; }
+  .price-card:hover { transform: translateY(-3px); box-shadow: 0 10px 26px rgba(60,30,90,.1); }
   .price-card .amount { font-size: 34px; font-weight: 800; margin: 6px 0 2px; }
   .price-card .per { color: #6d6480; font-size: 14px; }
   .best { position: absolute; top: -11px; left: 50%; transform: translateX(-50%); background: linear-gradient(90deg, #6c3fd4, #d4488b);
     color: #fff; font-size: 12px; font-weight: 700; padding: 3px 12px; border-radius: 999px; }
   .buy-btn { display: block; width: 100%; margin-top: 16px; padding: 13px 16px; font-size: 16px; font-weight: 700;
     border-radius: 12px; border: none; background: linear-gradient(90deg, #6c3fd4, #d4488b); color: #fff;
-    cursor: pointer; text-align: center; text-decoration: none; }
-  .buy-btn:hover { opacity: .92; }
+    cursor: pointer; text-align: center; text-decoration: none; transition: opacity .15s ease, transform .15s ease; }
+  .buy-btn:hover { opacity: .94; transform: translateY(-1px); }
   .btn-note { font-size: 12.5px; color: #8a7fa3; margin-top: 8px; }
   ol.steps { padding-left: 22px; }
   ol.steps li { margin-bottom: 12px; }
   .zh { background: #f7f2ff; border: 1px solid #e4d9fb; border-radius: 16px; padding: 20px 22px; }
-  details { background: rgba(255,255,255,.75); border: 1px solid #eee0d2; border-radius: 12px; padding: 12px 18px; margin-bottom: 10px; }
+  details { background: rgba(255,255,255,.82); border: 1px solid #eee0d2; border-radius: 12px; padding: 12px 18px; margin-bottom: 10px; }
   summary { font-weight: 700; cursor: pointer; }
   details p { margin: 8px 0 4px; color: #3d3650; }
   ul { padding-left: 22px; }
   footer { margin-top: 48px; border-top: 1px solid #eee0d2; padding-top: 18px; font-size: 13.5px; color: #6d6480; }
   footer a { color: #5b3ea8; text-decoration: none; font-weight: 600; }
   .mail { font-weight: 700; color: #221d2b; }
+
+  /* Mobile Sticky Bottom CTA */
+  .sticky-mobile-cta { display: none; }
+  @media (max-width: 680px) {
+    .sticky-mobile-cta {
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+      background: rgba(250, 244, 239, 0.96); backdrop-filter: blur(8px);
+      border-top: 1px solid #e4d9fb; box-shadow: 0 -6px 20px rgba(34, 29, 43, 0.1);
+      transform: translateY(110%); transition: transform .22s ease;
+    }
+    .sticky-mobile-cta.is-visible { transform: translateY(0); }
+    .sticky-copy { font-size: 13px; font-weight: 700; color: #221d2b; }
+    .sticky-copy span { display: block; font-size: 11.5px; font-weight: 500; color: #6d6480; }
+    .sticky-btn { white-space: nowrap; padding: 9px 14px; font-size: 13.5px; font-weight: 700; border-radius: 10px;
+      background: linear-gradient(90deg, #6c3fd4, #d4488b); color: #fff; text-decoration: none; }
+  }
 </style>
 </head>
 <body>
@@ -61,26 +179,36 @@
   <h1>Custom AI Pet Christmas Cards — Turn Your Pet's Photo Into a Festive Digital Card</h1>
   <p class="lede">Give your pet a starring role this Christmas. Send us a photo of your pet and PlAIground Lab's AI will turn it into a custom Christmas-themed digital card — ready to share with family and friends, or to send as a holiday greeting.</p>
   <span class="window-note">🎄 Order early — the holiday ordering window closes in mid-December</span>
+  <div class="trust-strip" aria-label="Service highlights">
+    <span class="trust-pill">✓ HD Digital Delivery by Email</span>
+    <span class="trust-pill">✓ 1 Free Error Regeneration</span>
+    <span class="trust-pill">✓ Secure Stripe Checkout</span>
+  </div>
 
-  <div class="ba">
-    <figure>
+  <div class="ba-wrap" id="hero-ba">
+    <div class="ba-compare" aria-label="Interactive before and after pet card comparison">
       <img src="sample-before-golden.webp" alt="Original photo of a golden retriever">
-      <figcaption>YOUR PHOTO</figcaption>
-    </figure>
-    <figure>
-      <img src="sample-card-golden.webp" alt="AI Christmas card generated from the golden retriever photo">
-      <figcaption>YOUR CHRISTMAS CARD</figcaption>
-    </figure>
+      <div class="ba-overlay" id="ba-overlay">
+        <img src="sample-card-golden.webp" alt="AI Christmas card generated from the golden retriever photo">
+      </div>
+      <span class="ba-tag ba-tag-before">ORIGINAL PHOTO</span>
+      <span class="ba-tag ba-tag-after">AI HOLIDAY CARD</span>
+      <div class="ba-divider" id="ba-divider" aria-hidden="true">
+        <span class="ba-handle">↔</span>
+      </div>
+      <input class="ba-range" id="ba-range" type="range" min="0" max="100" value="52" aria-label="Before and after comparison slider">
+    </div>
+    <p class="ba-hint">Drag slider to compare original photo → AI holiday card</p>
   </div>
 
   <h2>More festive stars</h2>
   <div class="gallery">
     <figure>
-      <img src="sample-card-cat.webp" alt="AI Christmas card featuring a cat">
+      <img src="sample-card-cat.webp" alt="AI Christmas card featuring a cat" loading="lazy">
       <figcaption>Every pet gets its own unique card</figcaption>
     </figure>
     <figure>
-      <img src="sample-card-corgi.webp" alt="AI Christmas card featuring a corgi">
+      <img src="sample-card-corgi.webp" alt="AI Christmas card featuring a corgi" loading="lazy">
       <figcaption>Stylised AI artwork, made from your photo</figcaption>
     </figure>
   </div>
@@ -96,7 +224,7 @@
     <p>Your cards are delivered digitally by email once generation and a quick quality check are complete. Please order early and allow time for AI generation before the holiday rush.</p>
   </div>
 
-  <h2>Pricing</h2>
+  <h2 id="pricing">Pricing</h2>
   <div class="prices">
     <div class="card price-card">
       <div style="font-weight:700;">Single Card</div>
@@ -176,5 +304,42 @@
     <p>All cards are AI-generated artwork created from your photo, for personal use only.</p>
   </footer>
 </div>
+
+<div class="sticky-mobile-cta" id="sticky-mobile-cta" aria-hidden="true">
+  <div class="sticky-copy">Pet Christmas Cards <span>From US$9.99 · 3-Pack US$19.99</span></div>
+  <a class="sticky-btn" href="#pricing">Order Now ↑</a>
+</div>
+
+<script>
+(function () {
+  var range = document.getElementById('ba-range');
+  var overlay = document.getElementById('ba-overlay');
+  var divider = document.getElementById('ba-divider');
+  if (range && overlay && divider) {
+    var syncSplit = function () {
+      var val = Number(range.value);
+      overlay.style.clipPath = 'inset(0 0 0 ' + val + '%)';
+      divider.style.left = val + '%';
+    };
+    range.addEventListener('input', syncSplit);
+    syncSplit();
+  }
+
+  var sticky = document.getElementById('sticky-mobile-cta');
+  var heroBa = document.getElementById('hero-ba');
+  var pricing = document.getElementById('pricing');
+  if (sticky && heroBa) {
+    var toggleSticky = function () {
+      var heroPassed = heroBa.getBoundingClientRect().bottom < 120;
+      var nearPricing = pricing ? (pricing.getBoundingClientRect().top < window.innerHeight && pricing.getBoundingClientRect().bottom > 80) : false;
+      var show = heroPassed && !nearPricing;
+      sticky.classList.toggle('is-visible', show);
+      sticky.setAttribute('aria-hidden', show ? 'false' : 'true');
+    };
+    window.addEventListener('scroll', toggleSticky, { passive: true });
+    toggleSticky();
+  }
+})();
+</script>
 </body>
 </html>
