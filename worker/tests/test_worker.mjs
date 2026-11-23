@@ -91,6 +91,47 @@ test('POST /webhook/stripe accepts valid test-mode checkout, dedupes replay, and
   assert.equal(notifications.length, 1);
 });
 
+test('POST /webhook/stripe ignores unpaid checkout sessions without writing KV or notifying', async () => {
+  const secret = 'whsec_test_unit_only_12345';
+  const nowSec = 1795380000;
+  const kv = makeMockKV();
+  const notifications = [];
+  const env = {
+    STRIPE_WEBHOOK_SECRET: secret,
+    ORDERS_KV: kv,
+    FULFILLMENT_WEBHOOK_URL: 'https://notify.example.test/send',
+    FULFILLMENT_WEBHOOK_TOKEN: 'tok_unit_only',
+    _TEST_NOW_SEC: nowSec,
+    _TEST_FETCH: async () => {
+      notifications.push(true);
+      return new Response('{"ok":true}', { status: 201 });
+    },
+  };
+
+  const unpaidEvent = {
+    id: 'evt_test_unpaid',
+    type: 'checkout.session.completed',
+    livemode: false,
+    data: {
+      object: {
+        id: 'cs_test_unpaid_001',
+        amount_total: 1999,
+        currency: 'usd',
+        payment_status: 'unpaid',
+      },
+    },
+  };
+
+  const res = await worker.fetch(await signedStripeRequest(unpaidEvent, secret, nowSec), env);
+  assert.equal(res.status, 200);
+  const body = await res.json();
+  assert.equal(body.ok, true);
+  assert.equal(body.ignored, 'unpaid_session');
+  assert.equal(body.payment_status, 'unpaid');
+  assert.equal(kv._store.size, 0);
+  assert.equal(notifications.length, 0);
+});
+
 test('POST /webhook/stripe rejects invalid signature and expired timestamp', async () => {
   const secret = 'whsec_test_unit_only_12345';
   const nowSec = 1795380000;

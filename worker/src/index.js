@@ -120,7 +120,11 @@ async function handleStripeWebhook(request, env) {
     return jsonResp({ error: 'invalid_json' }, 400);
   }
 
-  if (event.type !== 'checkout.session.completed') {
+  const ACCEPTED_EVENTS = new Set([
+    'checkout.session.completed',
+    'checkout.session.async_payment_succeeded',
+  ]);
+  if (!ACCEPTED_EVENTS.has(event.type)) {
     return jsonResp({ ok: true, ignored: event.type || 'unknown' }, 200);
   }
 
@@ -128,6 +132,18 @@ async function handleStripeWebhook(request, env) {
   const sessionId = session.id;
   if (!sessionId) {
     return jsonResp({ error: 'missing_session_id' }, 400);
+  }
+
+  if (session.payment_status !== 'paid') {
+    return jsonResp(
+      {
+        ok: true,
+        ignored: 'unpaid_session',
+        order_id: sessionId,
+        payment_status: session.payment_status || 'unknown',
+      },
+      200
+    );
   }
 
   const kvKey = `order:${sessionId}`;
